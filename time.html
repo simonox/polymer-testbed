@@ -1,0 +1,42 @@
+<dom-module id="timer-element">
+    <template>
+        <div class="time" style$="background-color:rgb({{r}},{{g}},{{b}})">time: <span>{{value}}</span><span>{{value-foo}}</span></div>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: 'timer-element',
+        properties: {
+            value: {
+                type: String,
+                value: 'looking up funkturm',
+            },
+            valueFoo: 'foo',
+            r: 0,
+            b: 0,
+            g: 0
+        },
+        valueChanged: function(newValue, oldValue){
+            console.log("New: %s, Old: %s, ", newValue, oldValue);
+        },
+        created: function() {
+            window.setInterval(() => {
+                var d = new Date();
+                var r = d.getSeconds();
+                var g =  d.getSeconds() * 3
+                var b = d.getSeconds() * 2;
+                this.set("r", r);
+                this.set("g", g);
+                this.set("b", b);
+                this.set("value", new Date());
+                this.set("value-foo", r);
+            }, 100);
+        }
+    });
+</script>
+<style>
+    .time {
+        color: green
+    }
+</style>
